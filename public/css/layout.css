@@ -1,0 +1,40 @@
+body {
+  background-color: #002F2F;
+  font-family: 'Droid Sans', sans-serif;
+}
+#container {
+  width: 900px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: .25em;
+
+}
+
+.center {
+  text-align: center;
+
+}
+#kittenOne {
+  margin: 8px;
+
+}
+#kittenTwo {
+  margin: 8px;
+}
+#imgOne {
+
+}
+#imgTwo {
+
+}
+#results {
+  float: right;
+}
+#myChart {
+  margin: 15px;
+}
+#newGame {
+}
+#myChart {
+
+}
