@@ -7,9 +7,12 @@ body {
   margin: 0 auto;
   background-color: #fff;
   border-radius: .25em;
+ overflow:hidden
 
 }
-
+header {
+  text-align: center;
+}
 .center {
   text-align: center;
 
@@ -22,16 +25,16 @@ body {
   margin: 8px;
 }
 #imgOne {
-
+  margin: 5px;
+  float: left;
 }
 #imgTwo {
+  margin: 5px;
+  float: left;
+}
 
-}
-#results {
+#kittenChart {
   float: right;
-}
-#myChart {
-  margin: 15px;
 }
 #newGame {
 }

@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title></title>
-  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-  <link href="css/layout.css" type="text/css" rel="stylesheet">
-  <script src="js/libs/Chart.js"></script>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+    <link href="css/layout.css" type="text/css" rel="stylesheet">
+    <script src="js/libs/Chart.js"></script>
+  <script src="js/libs/jquery.js"></script>
 </head>
+
 <body>
-  <main id="container">
-    <h1 class="center"> Select the image of the cuter kitten </h1>
-    <div id="results">
+    <main id="container">
+    <header>
+    <h1> Welcome to the kitty vote.</h1>
+    <p>Held occasionally. After selecting your favorite kitten, you'll see a chart appear. This will chart votes for you. Then we'll ask you to please vote again!</p>
+    </header>
+        <canvas id="kittenChart" width="250px" height="250px"></canvas>
+        <div id="kittenContainer">
 
-    </div>
-    <div id="kittenOne">
-
-    </div>
-    <div id="kittenTwo">
-
-    </div>
-
-    <canvas id="myChart" width="250px" height="250px"></canvas>
+        </div>
 
 
-  </main>
-<script src="js/scripts.js"></script>
+
+
+    </main>
+    <script src="js/scripts.js"></script>
 </body>
+
 </html>

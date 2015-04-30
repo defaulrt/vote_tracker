@@ -1,58 +1,92 @@
-(function(){
+(function() {
 
-  var kittens = ["kittens/kitten1.jpg", "kittens/kitten2.jpg", "kittens/kitten3.jpg",
-                 "kittens/kitten4.jpg", "kittens/kitten5.jpg", "kittens/kitten6.jpg", "kittens/kitten7.jpg", "kittens/kitten8.jpg",
-                 "kittens/kitten9.jpg", "kittens/kitten10.jpg", "kittens/kitten11.jpg", "kittens/kitten12.jpg", "kittens/kitten13.jpg",
-                 "kittens/kitten14.jpg"];
-  var votes = 0;
+    var kittens = [];
 
-  var pieData = [
-    {
-      value: 20,
-      color: "#878BB6"
-    },
-    {
-      value : 80,
-      color : "#4ACAB4"
+    function chartKittens(kitten1Votes, kitten2Votes) {
+
+        var data = [{
+            value: kitten1Votes,
+            color: "#F7464A",
+            highlight: "#FF5A5E",
+            label: "Red"
+        }, {
+            value: kitten2Votes,
+            color: "blue",
+            highlight: "#5AD3D1",
+            label: "Blue"
+        }, ];
+
+        var ctx = document.getElementById("kittenChart").getContext("2d");
+        var myDoughnutChart = new Chart(ctx).Doughnut(data);
     }
-    ];
 
-  randomImage(kittens);
-  function randomImage(imgAr) {
-
-    var num = Math.floor( Math.random() * imgAr.length );
-    var num2 =Math.floor( Math.random() * imgAr.length );
-    while (num === num2) {
-      num2 = Math.floor( Math.random() * imgAr.length );
+    var generateKittenObjs = function(numberKittens) {
+        for (var i = 1; i <= numberKittens; i++) {
+            var kitten = {
+                imgUrl: 'kittens/kitten' + i + '.jpg',
+                votes: 0,
+                timesShown: 0
+            };
+            kittens.push(kitten);
+        }
     }
-    var img = document.createElement('img');
-    img.setAttribute('id', 'imgOne' );
-    var img2 = document.createElement('img');
-    img2.setAttribute('id', 'imgTwo');
-    img.src = imgAr[num];
-    img2.src = imgAr[num2];
 
-    document.getElementById('kittenOne').appendChild(img);
-    document.getElementById('kittenTwo').appendChild(img2);
+    function randomImage(imgAr) {
+
+        var $kittenDiv = $('#kittenContainer').empty();
+
+
+        var num = Math.floor(Math.random() * imgAr.length);
+        var num2 = Math.floor(Math.random() * imgAr.length);
+
+        while (num === num2) {
+            num2 = Math.floor(Math.random() * imgAr.length);
+        }
+
+        var kitten1 = imgAr[num];
+        var img1 = $('<img>').attr({
+            id: 'imgOne',
+            src: kitten1.imgUrl
+        });
+
+        var kitten2 = imgAr[num2];
+        var img2 = $('<img>').attr({
+            id: 'imgTwo',
+            src: kitten2.imgUrl
+        });
+
+        $kittenDiv.append(img1, img2);
+
+
+
+        $('#imgOne').on('click', function() {
+            $(this).css("border", "5px solid blue");
+
+            kitten1.votes++;
+
+
+
+            setTimeout(randomImage, 500, kittens); //Clears and starts a new vote
+
+            chartKittens(kitten1.votes, kitten2.votes);
+
+
+        });
+        $('#imgTwo').on('click', function() {
+            $(this).css("border", "5px solid blue");
+
+            kitten2.votes++;
+
+
+            setTimeout(randomImage, 500, kittens); //Clears and starts a new vote
+
+            chartKittens(kitten1.votes, kitten2.votes);
+
+        });
     };
-    var kittenOne = document.getElementById('imgOne');
-    var kittenTwo = document.getElementById('imgTwo');
 
-    kittenOne.addEventListener('click', function() {
-      kittenOne.style.border = "5px solid blue";
+    generateKittenObjs(14); // generates the 14 kittens from selections
 
-    });
-    kittenTwo.addEventListener('click', function() {
-      kittenTwo.style.border = "5px solid red";
-
-    });
-    var chartDom = document.getElementById("myChart").getContext("2d");
-
-
-    var myNewChart = new Chart(chartDom).Doughnut(pieData);
-
-
-
-
+    randomImage(kittens); // begins the game
 
 }());
