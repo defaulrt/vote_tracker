@@ -20,16 +20,30 @@
         var myDoughnutChart = new Chart(ctx).Doughnut(data);
     }
 
-    var generateKittenObjs = function(numberKittens) {
-        for (var i = 1; i <= numberKittens; i++) {
-            var kitten = {
-                imgUrl: 'kittens/kitten' + i + '.jpg',
-                votes: 0,
-                timesShown: 0
-            };
-            kittens.push(kitten);
-        }
+var generateKittenObjs = function() {
+
+  $.ajax({
+    url: 'https://api.imgur.com/3/album/DDoWy#0',
+    headers: {
+      Authorization: 'Client-ID 5896025502cb86f'
+    },
+    dataType: 'json',
+    success: function (json) {
+      var imgArray = json.data.images;
+
+     for(var i=0; i < imgArray.length; i++) {
+        var kitten = {
+           imgUrl: imgArray[i].link,
+           votes: 0,
+           timesShown: 0
+        };
+        kittens.push(kitten);
+      }
+
+      randomImage(kittens);
     }
+  });
+}
 
     function randomImage(imgAr) {
 
@@ -66,7 +80,7 @@
 
 
 
-            setTimeout(randomImage, 500, kittens); //Clears and starts a new vote
+            setTimeout(randomImage, 500, kittens);//Clears and starts a new vote
 
             chartKittens(kitten1.votes, kitten2.votes);
 
@@ -78,15 +92,14 @@
             kitten2.votes++;
 
 
-            setTimeout(randomImage, 500, kittens); //Clears and starts a new vote
+            setTimeout(randomImage, 500, kittens);//Clears and starts a new vote
 
             chartKittens(kitten1.votes, kitten2.votes);
 
         });
     };
 
-    generateKittenObjs(14); // generates the 14 kittens from selections
-
-    randomImage(kittens); // begins the game
+    generateKittenObjs();
 
 }());
+
